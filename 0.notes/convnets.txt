@@ -1,0 +1,88 @@
+Statistical Invariance
+	+ Translation Invariance: the net needs to recognize a given type of object no matter where it is positioned in the image
+	=> Weight Sharing: if 2 inputs contain the same kind of information, you share their weights and train them jointly
+
+Patch = Kernel
+Feature Map = 1 "layer" (3 feature maps if image if of depth 3 - RGB)
+Stride = number of pixels shifted when moving from one patch to the other
+How do you handle the edges?
+	+ valid padding = don't go past the edge => output map is smaller 
+	+ same padding = go off the edge and pad with 0s => output map is the same size
+
+it's common to have more than one filter
+filter depth = amount of filters in a convoltional layer := k
+
+
+Given:
+- our input layer has a width of W and a height of H
+- our convolutional layer has a filter size F
+- we have a stride of S
+- a padding of P
+- and the number of filters K,
+
+the following formula gives us the width of the next layer: 
+			W_out = (W−F+2P)/S+1.
+
+The output height would be H_out = (H-F+2P)/S + 1.
+
+And the output depth would be equal to the number of filters D_out = K.
+
+The output volume would be W_out * H_out * D_out
+
+
+--------------
+
+In summary TensorFlow uses the following equation for 'SAME' vs 'PADDING'
+
+SAME Padding, the output height and width are computed as:
+
+	out_height = ceil(float(in_height) / float(strides1))
+	out_width = ceil(float(in_width) / float(strides[2]))
+
+VALID Padding, the output height and width are computed as:
+
+	out_height = ceil(float(in_height - filter_height + 1) / float(strides1))
+	out_width = ceil(float(in_width - filter_width + 1) / float(strides[2]))
+
+---------------
+
+creating conv layers with tf
+	tf.nn.conv2d()
+	tf.nn.bias_add()
+
+
+------------------
+
+max pooling with tf
+	tf.nn.max_pool()
+
+
+------------------
+
+classic structure of CNNs: a mix of convolutional layers and max pooling, followed by fully-connected layers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

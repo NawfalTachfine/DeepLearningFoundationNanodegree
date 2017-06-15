@@ -1,0 +1,101 @@
+Ran operations in tf.Session.
+Created a constant tensor with tf.constant().
+Used tf.placeholder() and feed_dict to get input.
+Applied the tf.add(), tf.subtract(), tf.multiply(), and tf.divide() functions using numeric data.
+Learned about casting between types with tf.cast()
+
+
+
+
+
+9. Supervised Classification
+10. Training Your Logistic Classifier
+
+
+# Cannot be modified
+tf.placeholder()
+tf.constant()
+
+# Can be modified
+tf.Variable()
+
+# Init
+i = tf.global_variables_initializer()
+with tf.Session() as s:
+	s.run(i)
+
+# Random init
+tf.truncated_normal() 
+
+# No need to randomize bias
+tf.zeros()
+
+
+weights = tf.Variable(tf.truncated_normal((n_features, n_labels)))
+bias = tf.Variable(tf.zeros(n_labels))
+
+
+tf.nn.softmax()
+
+# one-hot with scikit
+import numpy as np
+from sklearn import preprocessing
+
+lb = preprocessing.LabelBinarizer()
+lb.fit(labels)
+lb.transform(labels)
+
+
+# cross-entropy
+tf.reduce_sum()
+tf.log()
+
+
+# Numerical stability
+adding very large numbers to very small numbers induces plenty of errors
+=> don't allow the loss function to get too long or too small
+=> input & weight normalization
+
+# Helping SGD
+inputs: mean 0 and equal small variance
+initialize weights: random!, mean 0, equal small variance
+
+# Momentum
+= running average of the gradient
+
+# learning rate decay
+
+!!! when things don't work, lower your learning rate
+=> ADAGRAD = SGD modified for momentum and learning rate decay
+
+in TF, None is the dimension place holder
+
+# Epochs
+= single forward/backward pass of the whole dataset
+
+# ReLUs
+tf.nn.relu()
+
+# Hidden Layer with ReLU activation function
+hidden_layer = tf.add(tf.matmul(features, hidden_weights), hidden_biases)
+hidden_layer = tf.nn.relu(hidden_layer)
+output = tf.add(tf.matmul(hidden_layer, output_weights), output_biases)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
